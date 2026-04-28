@@ -161,12 +161,11 @@ class PreviewViewController: NSViewController, QLPreviewingController {
             let msg =
                 """
                         <div id="container" style="font-size: 1.5rem">
-                            <h1><img src="data:image/png;base64,\(icon)" width="75" height="75" alt="logo" id="logo" /> QLMarkdown</h1>
+                            <h1><img src="data:image/png;base64,\(icon)" width="75" height="75" alt="logo" id="logo" /> CHaiMPION Markdown Viewer</h1>
                             <p>Thanks to this application you have viewed over <b>\(Settings.renderStats) files</b>.</p>
-                            <p>If you find it useful and you have the possibility, consider <a href="https://buymeacoffee.com/sbarex"><b>buying me a coffee!</b></a></p>
                             <br />
                             <hr size="1" />
-                            <p class="small">Developed by SBAREX with ❤️ | <a href="https://github.com/sbarex/QLMarkdown">https://github.com/sbarex/QLMarkdown</a></p>
+                            <p class="small">CHaiMPION Markdown Viewer · built on <a href="https://github.com/sbarex/QLMarkdown">QLMarkdown by sbarex</a> (MIT)</p>
                             </p>
                         </div>
                 """

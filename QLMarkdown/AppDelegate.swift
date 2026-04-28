@@ -207,6 +207,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
     }
     
     @IBAction func buyMeACoffee(_ sender: Any?) {
+        // Forwards to upstream sbarex (the original author) — preserves
+        // the upstream "support the developer" pathway. CHaiMPION fork
+        // does not solicit coffees of its own.
         let url = URL(string: "https://www.buymeacoffee.com/sbarex")!
         NSWorkspace.shared.open(url)
     }

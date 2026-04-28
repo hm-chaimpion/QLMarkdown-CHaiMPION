@@ -345,20 +345,17 @@ class Settings: Codable {
      * Informative message.
      */
     static var aboutInfo: String {
-        var title: String = "<a href='https://github.com/sbarex/QLMarkdown'>";
+        var title: String = "<a href='https://github.com/hm-chaimpion/QLMarkdown-CHaiMPION'>";
         if let info = Bundle.main.infoDictionary {
-            title += (info["CFBundleExecutable"] as? String ?? "QLMarkdown") + "</a>"
+            title += (info["CFBundleExecutable"] as? String ?? "CHaiMPION Markdown Viewer") + "</a>"
             if let version = info["CFBundleShortVersionString"] as? String,
                 let build = info["CFBundleVersion"] as? String {
                 title += ", version \(version) (\(build))"
             }
-            if let copy = info["NSHumanReadableCopyright"] as? String {
-                title += ".<br />\n\(copy.trimmingCharacters(in: CharacterSet(charactersIn: ". ")) + " with <span style='font-style: normal'>❤️</span>")"
-            }
         } else {
-            title += "QLMarkdown</a>"
+            title += "CHaiMPION Markdown Viewer</a>"
         }
-        title += ".<br/>\nIf you like this app, <a href='https://www.buymeacoffee.com/sbarex'><strong>buy me a coffee</strong></a>!"
+        title += ".<br/>\nBuilt on <a href='https://github.com/sbarex/QLMarkdown'>sbarex/QLMarkdown</a> — <a href='https://www.buymeacoffee.com/sbarex'>buy them a coffee</a>."
         return title
     }
     
@@ -366,7 +363,7 @@ class Settings: Codable {
      * Informative hidden message.
      */
     static var aboutComment: String {
-        var title: String = "<!--\n\nFile generated with QLMarkdown [https://github.com/sbarex/QLMarkdown] - ";
+        var title: String = "<!--\n\nFile generated with CHaiMPION Markdown Viewer [https://github.com/hm-chaimpion/QLMarkdown-CHaiMPION], built on QLMarkdown [https://github.com/sbarex/QLMarkdown] - ";
         if let info = Bundle.main.infoDictionary {
             title += (info["CFBundleExecutable"] as? String ?? "QLMarkdown")
             if let version = info["CFBundleShortVersionString"] as? String,
@@ -461,7 +458,7 @@ class Settings: Codable {
     var tableExtension: Bool = true
     var tagFilterExtension: Bool = true
     var taskListExtension: Bool = true
-    var yamlExtension: YamlMode = .onlyRmd
+    var yamlExtension: YamlMode = .allFiles
     var emojiExtension: EmojiMode = .font
     var strikethroughExtension: StrikethroughMode = .single
     var syntaxHighlightExtension: Bool = true

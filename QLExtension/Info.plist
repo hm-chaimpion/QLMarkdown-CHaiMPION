@@ -56,6 +56,6 @@
 		<string>$(PRODUCT_MODULE_NAME).PreviewViewController</string>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Developed by SBAREX 2020 - 2026.</string>
+	<string>© 2026 CHaiMPION. Built on QLMarkdown by SBAREX (MIT).</string>
 </dict>
 </plist>

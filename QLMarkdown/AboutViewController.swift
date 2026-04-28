@@ -32,7 +32,8 @@ class AboutViewController: NSViewController {
         let bg_color = NSColor.textBackgroundColor.css() ?? "#ffffff"
         var s = "<div style='font-family: -apple-system; text-align: center; color: \(fg_color); background-color: \(bg_color)'>"
         
-        s += "<b>Developer</b><br /><a href='https://github.com/sbarex/'>sbarex</a><br /><a href='https://github.com/sbarex/QLMarkdown'>https://github.com/sbarex/QLMarkdown</a><br /><br />"
+        s += "<b>CHaiMPION Markdown Viewer</b><br /><a href='https://github.com/hm-chaimpion/QLMarkdown-CHaiMPION'>github.com/hm-chaimpion/QLMarkdown-CHaiMPION</a><br /><br />"
+        s += "<b>Built on QLMarkdown</b> by <a href='https://github.com/sbarex/'>sbarex</a> (MIT)<br /><a href='https://github.com/sbarex/QLMarkdown'>github.com/sbarex/QLMarkdown</a> · <a href='https://www.buymeacoffee.com/sbarex'>buy them a coffee</a><br /><br />"
         
         s += "<b>Libraries</b><br />"
         s += "cmark-gfm version \(String(cString: cmark_version_string())) (\(cmark_version())) (<a href=\"https://github.com/github/cmark-gfm\">https://github.com/github/cmark-gfm</a>)<br />\n"
