@@ -849,6 +849,52 @@ securityLevel: 'strict'
         let wrapper_open = self.renderAsCode ? "<pre class='hl'>" : "<article class='markdown-body'>"
         let wrapper_close = self.renderAsCode ? "</pre>" : "</article>"
         let body_style = self.renderAsCode ? " class='hl'" : ""
+
+        // CHaiMPION fork — branded header bar + attribution footer baked
+        // into every rendered preview. Styled inline so the chrome isn't
+        // dependent on customCSS (which may be overridden by users).
+        let chaimpion_chrome_css = """
+<style type='text/css'>
+.chaimpion-header {
+  margin: -1rem -1rem 1.5rem -1rem;
+  padding: 0.45rem 1rem;
+  background: linear-gradient(90deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0));
+  border-bottom: 1px solid rgba(0, 122, 255, 0.25);
+  font: 600 0.72rem -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0, 90, 200, 0.95);
+}
+.chaimpion-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(127, 127, 127, 0.25);
+  font: 500 0.78rem -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.02em;
+  color: rgba(127, 127, 127, 0.9);
+  text-align: center;
+}
+.chaimpion-footer a { color: inherit; }
+@media (prefers-color-scheme: dark) {
+  .chaimpion-header {
+    background: linear-gradient(90deg, rgba(64, 156, 255, 0.12), rgba(64, 156, 255, 0));
+    border-bottom-color: rgba(64, 156, 255, 0.3);
+    color: rgba(120, 180, 255, 0.95);
+  }
+  .chaimpion-footer {
+    color: rgba(180, 180, 180, 0.7);
+    border-top-color: rgba(180, 180, 180, 0.2);
+  }
+}
+</style>
+"""
+        let chaimpion_header_html = "<div class='chaimpion-header'>◆ CHaiMPION  ·  Markdown Viewer</div>"
+        let chaimpion_footer_html = """
+<div class='chaimpion-footer'>
+Preview by CHaiMPION Markdown Viewer  ·  built on <a href="https://github.com/sbarex/QLMarkdown">sbarex/QLMarkdown</a> (MIT)
+</div>
+"""
+
         let html =
 """
 <!doctype html>
@@ -858,12 +904,15 @@ securityLevel: 'strict'
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
 <title>\(title)</title>
 \(style)
+\(chaimpion_chrome_css)
 \(s_header)
 </head>
 <body\(body_style)>
+\(chaimpion_header_html)
 \(wrapper_open)
 \(processedBody)
 \(wrapper_close)
+\(chaimpion_footer_html)
 \(s_footer)
 \(Self.aboutComment)
 </body>
