@@ -1,0 +1,52 @@
+/* QLMarkdown-CHaiMPION — preview chrome
+ * Injected via QLMarkdown's customCSS option. Adds a slim CHaiMPION
+ * header bar at the top and an attribution footer at the bottom of
+ * every Quick Look preview.
+ *
+ * Constraints:
+ *   - CSS `content:` is plain text (no clickable links until v0.2)
+ *   - Must look reasonable in light + dark schemes
+ *   - Keeps sbarex/QLMarkdown attribution per MIT + community norms
+ */
+
+body::before {
+  content: "◆ CHaiMPION  ·  Markdown Viewer";
+  display: block;
+  margin: -1rem -1rem 1.5rem -1rem;
+  padding: 0.45rem 1rem;
+  background: linear-gradient(90deg, rgba(0, 122, 255, 0.08), rgba(0, 122, 255, 0));
+  border-bottom: 1px solid rgba(0, 122, 255, 0.25);
+  font-size: 0.72rem;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(0, 90, 200, 0.95);
+}
+
+body::after {
+  content: "Preview by QLMarkdown-CHaiMPION  ·  built on sbarex/QLMarkdown  ·  CHaiMPION Operating System";
+  display: block;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(127, 127, 127, 0.25);
+  font-size: 0.78rem;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(127, 127, 127, 0.9);
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    background: linear-gradient(90deg, rgba(64, 156, 255, 0.12), rgba(64, 156, 255, 0));
+    border-bottom-color: rgba(64, 156, 255, 0.3);
+    color: rgba(120, 180, 255, 0.95);
+  }
+  body::after {
+    color: rgba(180, 180, 180, 0.7);
+    border-top-color: rgba(180, 180, 180, 0.2);
+  }
+}
