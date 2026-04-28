@@ -939,49 +939,53 @@ securityLevel: 'strict'
         return result
     }
 
+    /// Wrap http(s) URLs in YAML values with `<a>` tags so they're
+    /// clickable in the rendered preview. Also escapes HTML-unsafe
+    /// characters in the surrounding text.
+    /// CHaiMPION fork addition (v0.2): clickable URLs in YAML frontmatter.
+    internal func linkifyYamlValue(_ value: String) -> String {
+        let urlPattern = #"https?://[^\s<>"'\)\]]+"#
+        guard let regex = try? NSRegularExpression(pattern: urlPattern) else {
+            return value
+        }
+        let range = NSRange(value.startIndex..., in: value)
+        let matches = regex.matches(in: value, range: range)
+        guard !matches.isEmpty else {
+            return value
+        }
+        var result = ""
+        var cursor = value.startIndex
+        for match in matches {
+            guard let r = Range(match.range, in: value) else { continue }
+            result += value[cursor..<r.lowerBound]
+            let url = String(value[r])
+            result += "<a href=\"\(url)\">\(url)</a>"
+            cursor = r.upperBound
+        }
+        result += value[cursor...]
+        return result
+    }
+
     internal func renderYaml(_ yaml: [(key: AnyHashable, value: Any)]) -> String {
         guard yaml.count > 0 else {
             return ""
         }
-        
+
         var s = "<table>"
         for element in yaml {
             let key: String = "<strong>\(element.key)</strong>"
-            /*
-            do {
-                key = try self.render(text: "**\(element.key)**", filename: "", forAppearance: .light, baseDir: "")
-            } catch {
-                key = "<strong>\(element.key)</strong>"
-            }*/
             s += "<tr><td align='right'>\(key)</td><td>"
             if let t = element.value as? [(key: AnyHashable, value: Any)] {
                 s += renderYaml(t)
             } else if let t = element.value as? [Any] {
                 s += "<ul>\n" + t.map({ v in
-                    let s: String = "\(v)"
-                    /*
-                    if let t = v as? String {
-                        do {
-                            s = try self.render(text: t, filename: "", forAppearance: .light, baseDir: "")
-                        } catch {
-                            s = t
-                        }
-                    } else {
-                        s = "\(v)"
-                    }*/
-                    return "<li>\(s)</li>"
+                    let raw: String = "\(v)"
+                    return "<li>\(self.linkifyYamlValue(raw))</li>"
                 }).joined(separator: "\n")
             } else if let t = element.value as? String {
-                s += t
-                /*
-                do {
-                    s += try self.render(text: t, filename: "", forAppearance: .light, baseDir: "")
-                } catch {
-                    s += t.replacingOccurrences(of: "|", with: #"\|"#)
-                }
-                */
+                s += self.linkifyYamlValue(t)
             } else {
-                s += "\(element.value)"
+                s += self.linkifyYamlValue("\(element.value)")
             }
             s += "</td></tr>\n"
         }
